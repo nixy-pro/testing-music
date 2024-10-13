@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pemutar Musik Streaming</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #181818;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+    }
+    table {
+      width: 100%;
+      max-width: 600px;
+      border-spacing: 15px;
+    }
+    .music-player {
+      width: 100%;
+      background-color: #1e1e1e;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+    .music-player:hover {
+      background-color: #2e2e2e;
+    }
+    h2 {
+      color: #FF6E61;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    audio {
+      width: 100%;
+      margin: 10px 0;
+      display: none;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+    .controls button {
+      background-color: transparent;
+      border: none;
+      color: #FF6E61;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .controls button:hover {
+      color: #fff;
+    }
+    .progress-bar {
+      background-color: #333;
+      border-radius: 10px;
+      width: 100%;
+      height: 8px;
+      margin: 10px 0;
+      position: relative;
+    }
+    .progress {
+      background-color: #FF6E61;
+      height: 100%;
+      border-radius: 10px;
+      width: 0%;
+    }
+    .time {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #ccc;
+    }
+    .volume-control {
+      display: none;
+      width: 100px;
+      margin-left: 15px;
+    }
+    .volume-icon {
+      cursor: pointer;
+      font-size: 24px;
+      color: #FF6E61;
+      display: inline;
+    }
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <td>
+      <!-- Pemutar 1 -->
+      <div class="music-player" id="player1">
+        <h2 id="song-title-1">Symphony</h2>
+
+        <audio id="audio-player-1">
+          <source src="https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Clean-Bandit-Symphony.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        
+        <div class="progress-bar">
+          <div class="progress" id="progress-1"></div>
+        </div>
+
+        <div class="time">
+          <span id="current-time-1">0:00</span>
+          <span id="total-time-1">0:00</span>
+        </div>
+
+        <div class="controls">
+          <button id="play-btn-1" title="Play"><i class="fas fa-play"></i></button>
+          <div>
+            <span class="volume-icon" id="volume-icon-1" title="Volume"><i class="fas fa-volume-up"></i></span>
+            <input type="range" class="volume-control" id="volume-slider-1" min="0" max="1" step="0.01" value="0.5">
+            <span class="volume-icon hide" id="volume-show-icon-1" title="Show Volume"><i class="fas fa-volume-off"></i></span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <!-- Pemutar 2 (Contoh) -->
+      <div class="music-player" id="player2">
+        <h2 id="song-title-2">Lagu Contoh 2</h2>
+
+        <audio id="audio-player-2">
+          <source src="URL_LAGU_2" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        
+        <div class="progress-bar">
+          <div class="progress" id="progress-2"></div>
+        </div>
+
+        <div class="time">
+          <span id="current-time-2">0:00</span>
+          <span id="total-time-2">0:00</span>
+        </div>
+
+        <div class="controls">
+          <button id="play-btn-2" title="Play"><i class="fas fa-play"></i></button>
+          <div>
+            <span class="volume-icon" id="volume-icon-2" title="Volume"><i class="fas fa-volume-up"></i></span>
+            <input type="range" class="volume-control" id="volume-slider-2" min="0" max="1" step="0.01" value="0.5">
+            <span class="volume-icon hide" id="volume-show-icon-2" title="Show Volume"><i class="fas fa-volume-off"></i></span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+  
+  
+  <table>
+  <tr>
+    <td>
+      <!-- Pemutar 1 -->
+      <div class="music-player" id="player1">
+        <h2 id="song-title-1">Symphony</h2>
+
+        <audio id="audio-player-1">
+          <source src="https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Clean-Bandit-Symphony.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        
+        <div class="progress-bar">
+          <div class="progress" id="progress-1"></div>
+        </div>
+
+        <div class="time">
+          <span id="current-time-1">0:00</span>
+          <span id="total-time-1">0:00</span>
+        </div>
+
+        <div class="controls">
+          <button id="play-btn-1" title="Play"><i class="fas fa-play"></i></button>
+          <div>
+            <span class="volume-icon" id="volume-icon-1" title="Volume"><i class="fas fa-volume-up"></i></span>
+            <input type="range" class="volume-control" id="volume-slider-1" min="0" max="1" step="0.01" value="0.5">
+            <span class="volume-icon hide" id="volume-show-icon-1" title="Show Volume"><i class="fas fa-volume-off"></i></span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+    
+    
+    <table>
+  <tr>
+    <td>
+      <!-- Pemutar 1 -->
+      <div class="music-player" id="player1">
+        <h2 id="song-title-1">Symphony</h2>
+
+        <audio id="audio-player-1">
+          <source src="https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Clean-Bandit-Symphony.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        
+        <div class="progress-bar">
+          <div class="progress" id="progress-1"></div>
+        </div>
+
+        <div class="time">
+          <span id="current-time-1">0:00</span>
+          <span id="total-time-1">0:00</span>
+        </div>
+
+        <div class="controls">
+          <button id="play-btn-1" title="Play"><i class="fas fa-play"></i></button>
+          <div>
+            <span class="volume-icon" id="volume-icon-1" title="Volume"><i class="fas fa-volume-up"></i></span>
+            <input type="range" class="volume-control" id="volume-slider-1" min="0" max="1" step="0.01" value="0.5">
+            <span class="volume-icon hide" id="volume-show-icon-1" title="Show Volume"><i class="fas fa-volume-off"></i></span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+      
+      
+      <table>
+  <tr>
+    <td>
+      <!-- Pemutar 1 -->
+      <div class="music-player" id="player1">
+        <h2 id="song-title-1">Symphony</h2>
+
+        <audio id="audio-player-1">
+          <source src="https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Clean-Bandit-Symphony.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        
+        <div class="progress-bar">
+          <div class="progress" id="progress-1"></div>
+        </div>
+
+        <div class="time">
+          <span id="current-time-1">0:00</span>
+          <span id="total-time-1">0:00</span>
+        </div>
+
+        <div class="controls">
+          <button id="play-btn-1" title="Play"><i class="fas fa-play"></i></button>
+          <div>
+            <span class="volume-icon" id="volume-icon-1" title="Volume"><i class="fas fa-volume-up"></i></span>
+            <input type="range" class="volume-control" id="volume-slider-1" min="0" max="1" step="0.01" value="0.5">
+            <span class="volume-icon hide" id="volume-show-icon-1" title="Show Volume"><i class="fas fa-volume-off"></i></span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+        
+        
+        <table>
+  <tr>
+    <td>
+      <!-- Pemutar 1 -->
+      <div class="music-player" id="player1">
+        <h2 id="song-title-1">Symphony</h2>
+
+        <audio id="audio-player-1">
+          <source src="https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Clean-Bandit-Symphony.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        
+        <div class="progress-bar">
+          <div class="progress" id="progress-1"></div>
+        </div>
+
+        <div class="time">
+          <span id="current-time-1">0:00</span>
+          <span id="total-time-1">0:00</span>
+        </div>
+
+        <div class="controls">
+          <button id="play-btn-1" title="Play"><i class="fas fa-play"></i></button>
+          <div>
+            <span class="volume-icon" id="volume-icon-1" title="Volume"><i class="fas fa-volume-up"></i></span>
+            <input type="range" class="volume-control" id="volume-slider-1" min="0" max="1" step="0.01" value="0.5">
+            <span class="volume-icon hide" id="volume-show-icon-1" title="Show Volume"><i class="fas fa-volume-off"></i></span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+<script>
+  const players = [
+    {
+      id: 1,
+      title: "Symphony",
+      audio: document.getElementById('audio-player-1'),
+      playBtn: document.getElementById('play-btn-1'),
+      progressBar: document.getElementById('progress-1'),
+      currentTimeEl: document.getElementById('current-time-1'),
+      totalTimeEl: document.getElementById('total-time-1'),
+      volumeSlider: document.getElementById('volume-slider-1'),
+      volumeIcon: document.getElementById('volume-icon-1'),
+      volumeShowIcon: document.getElementById('volume-show-icon-1'),
+      isVolumeVisible: false,
+    },
+    {
+      id: 2,
+      title: "Lagu Contoh 2",
+      audio: document.getElementById('audio-player-2'),
+      playBtn: document.getElementById('play-btn-2'),
+      progressBar: document.getElementById('progress-2'),
+      currentTimeEl: document.getElementById('current-time-2'),
+      totalTimeEl: document.getElementById('total-time-2'),
+      volumeSlider: document.getElementById('volume-slider-2'),
+      volumeIcon: document.getElementById('volume-icon-2'),
+      volumeShowIcon: document.getElementById('volume-show-icon-2'),
+      isVolumeVisible: false,
+    }
+  ];
+
+  function loadSong(player) {
+    player.audio.load();
+    updateProgressBar(player);
+  }
+
+  function playSong(player) {
+    player.audio.play();
+    player.playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    updateProgressBar(player);
+  }
+
+  function pauseSong(player) {
+    player.audio.pause();
+    player.playBtn.innerHTML = '<i class="fas fa-play"></i>';
+  }
+
+  function updateProgressBar(player) {
+    player.audio.addEventListener('timeupdate', () => {
+      const progressPercent = (player.audio.currentTime / player.audio.duration) * 100;
+      player.progressBar.style.width = `${progressPercent}%`;
+
+      const currentMinutes = Math.floor(player.audio.currentTime / 60);
+      const currentSeconds = Math.floor(player.audio.currentTime % 60);
+      player.currentTimeEl.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+
+      const totalMinutes = Math.floor(player.audio.duration / 60);
+      const totalSeconds = Math.floor(player.audio.duration % 60);
+      if (!isNaN(totalMinutes) && !isNaN(totalSeconds)) {
+        player.totalTimeEl.textContent = `${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
+      }
+    });
+  }
+
+  players.forEach(player => {
+    player.playBtn.addEventListener('click', () => {
+      if (player.audio.paused) {
+        // Pause all other players
+        players.forEach(p => {
+          if (p !== player) {
+            pauseSong(p);
+          }
+        });
+        playSong(player);
+      } else {
+        pauseSong(player);
+      }
+    });
+
+    player.volumeIcon.addEventListener('click', () => {
+      player.isVolumeVisible = !player.isVolumeVisible;
+      player.volumeSlider.style.display = player.isVolumeVisible ? 'block' : 'none';
+      player.volumeIcon.classList.toggle('hide', player.isVolumeVisible);
+      player.volumeShowIcon.classList.toggle('hide', !player.isVolumeVisible);
+    });
+
+    player.volumeSlider.addEventListener('input', () => {
+      player.audio.volume = player.volumeSlider.value;
+    });
+
+    player.audio.addEventListener('ended', () => {
+      // Pindah ke musik berikutnya
+      const nextPlayer = players.find(p => p.id === player.id + 1);
+      if (nextPlayer) {
+        playSong(nextPlayer);
+      } else {
+        // Jika sudah musik terakhir, kembali ke yang pertama
+        playSong(players[0]);
+      }
+    });
+
+    loadSong(player);
+  });
+</script>
+
+</body>
+</html>
